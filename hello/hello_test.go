@@ -12,15 +12,21 @@ func TestHello(t *testing.T) {
 	}
 
 	t.Run("greeting to people", func(t *testing.T) {
-		got := Hello("Chris")
+		got := Hello("Chris", "")
 		expected := "Hello, Chris"
 		assertMessage(t, got, expected)
 	})
 
 
 	t.Run("greeting the world when there is no argument", func(t *testing.T) {
-		got := Hello("")
+		got := Hello("", "")
 		expected := "Hello, World"
+		assertMessage(t, got, expected)
+	})
+
+	t.Run("greeting in Spanish", func(t *testing.T) {
+		got := Hello("Elodie", "Spanish")
+		expected := "Hola, Elodie"
 		assertMessage(t, got, expected)
 	})
 }
