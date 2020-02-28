@@ -18,4 +18,20 @@ func TestHasSuffix(t *testing.T) {
 			t.Errorf("expected %t but got %t", expected, hasSuffix)
 		}
 	})
+
+	t.Run("suffix is empty", func(t *testing.T) {
+		hasSuffix := HasSuffix("Taiwan", "")
+		expected := true
+		if hasSuffix != expected {
+			t.Errorf("expected %t but got %t", expected, hasSuffix)
+		}
+	})
+
+	t.Run("input is empty", func(t *testing.T) {
+		hasSuffix := HasSuffix("", "wanwan")
+		expected := false
+		if hasSuffix != expected {
+			t.Errorf("expected %t but got %t", expected, hasSuffix)
+		}
+	})
 }
