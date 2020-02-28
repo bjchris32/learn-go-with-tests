@@ -4,6 +4,9 @@ package iteration
 func HasSuffix(input, suffix string) bool {
 	suffixLength := len(suffix)
 	inputLength := len(input)
+	if inputLength < suffixLength {
+		return false
+	}
 	inputSuffix := input[inputLength-suffixLength:inputLength]
 	if inputSuffix == suffix {
 		return true
