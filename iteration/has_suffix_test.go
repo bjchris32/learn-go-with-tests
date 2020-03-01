@@ -1,6 +1,7 @@
 package iteration
 
 import "testing"
+import "fmt"
 
 func TestHasSuffix(t *testing.T) {
 	t.Run("has the suffix", func(t *testing.T) {
@@ -34,4 +35,16 @@ func TestHasSuffix(t *testing.T) {
 			t.Errorf("expected %t but got %t", expected, hasSuffix)
 		}
 	})
+}
+
+func ExampleHasSuffix_1() {
+	hasSuffix := HasSuffix("Taiwan", "wan")
+	fmt.Println(hasSuffix)
+	// Output: true
+}
+
+func ExampleHasSuffix_2() {
+	hasSuffix := HasSuffix("Taiwan", "naw")
+	fmt.Println(hasSuffix)
+	// Output: false
 }
