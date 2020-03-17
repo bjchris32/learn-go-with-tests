@@ -1,4 +1,4 @@
-package perimeter
+package rectangle
 
 import "testing"
 
