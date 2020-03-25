@@ -30,10 +30,5 @@ func TestArea(t *testing.T) {
 				t.Errorf("%#v got %g expected %g", testItem.shape, got, testItem.expected)
 			}
 		})
-
-		// got := testItem.shape.Area()
-		// if got != testItem.expected {
-		// 	t.Errorf("got %g expected %g", got, testItem.expected)
-		// }
 	}
 }
