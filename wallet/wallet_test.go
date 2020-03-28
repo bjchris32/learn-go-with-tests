@@ -36,6 +36,4 @@ func TestWallet(t *testing.T) {
 			t.Error("expected an error but didn't get one")
 		}
 	})
-
-
 }
