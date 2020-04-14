@@ -4,6 +4,7 @@ import (
     "fmt"
     "os"
     "io"
+    "net/http"
 )
 
 
@@ -14,6 +15,13 @@ func Greet(writer io.Writer, name string) {
 	fmt.Fprintf(writer, "Hello, %s", name) // send the string into the buffer
 }
 
+func MyGreeterHandler(w http.ResponseWriter, r *http.Request) {
+	Greet(w, "world")
+}
+
 func main() {
+	// the First io.Writer in both os.Stdout and bytes.Buffer
 	Greet(os.Stdout, "Elodie")
+	// the second io.Writer in http.ResponseWriter
+	http.ListenAndServe(":5000", http.HandlerFunc(MyGreeterHandler))
 }
