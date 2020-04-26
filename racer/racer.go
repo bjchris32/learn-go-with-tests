@@ -1,16 +1,20 @@
 package racer
 
 import (
+	"time"
+	"fmt"
 	"net/http"
 )
 
-func Racer(a, b string) (winner string) {
+func Racer(a, b string) (winner string, error error) {
 	// wait multiple channel at the same time
 	select {
 	case <-ping(a):
-		return a
+		return a, nil
 	case <-ping(b):
-		return b
+		return b, nil
+	case <-time.After(10 * time.Second):
+		return "", fmt.Errorf("timed out waiting for %s and %s", a, b)
 	}
 }
 
