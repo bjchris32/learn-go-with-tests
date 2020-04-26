@@ -1,7 +1,6 @@
 package racer
 
 import (
-	"time"
 	"net/http"
 )
 
