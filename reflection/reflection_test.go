@@ -126,6 +126,23 @@ func TestWalk(t *testing.T) {
 			t.Errorf("got %v, expected %v", got, expected)
 		}
 	})
+
+	t.Run("with function", func(t *testing.T) {
+		aFunction := func() (Profile, Profile) {
+			return Profile{33, "Berlin"}, Profile{34, "Katowice"}
+		}
+
+		var got []string
+		expected := []string{"Berlin", "Katowice"}
+
+		walk(aFunction, func(input string) {
+			got = append(got, input)
+		})
+
+		if !reflect.DeepEqual(got, expected) {
+			t.Errorf("got %v, expected %v", got, expected)
+		}
+	})
 }
 
 func assertContains(t *testing.T, haystack []string, needle string) {
