@@ -22,10 +22,11 @@ func TestCounter(t *testing.T) {
 		wg.Add(expectedCount)
 
 		for i := 0; i < expectedCount; i++ {
+			// the go routine should dereference the wait group address to get the value
 			go func(w *sync.WaitGroup) {
 				counter.Inc()
 				w.Done()
-			}(&wg)
+			}(&wg) // the go routine needs to take wait group's address as arguemnt
 		}
 
 		wg.Wait()
