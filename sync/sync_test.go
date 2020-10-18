@@ -6,7 +6,7 @@ import "sync"
 // communicate by sharing by memory
 func TestCounter(t *testing.T) {
 	t.Run("incrementing the counter 3 times leaves it at 3", func(t *testing.T) {
-		counter := Counter{}
+		counter := NewCounter()
 		counter.Inc()
 		counter.Inc()
 		counter.Inc()
@@ -16,7 +16,7 @@ func TestCounter(t *testing.T) {
 
 	t.Run("it runs safely concurrently", func(t *testing.T) {
 		expectedCount := 1000
-		counter := Counter{}
+		counter := NewCounter()
 
 		var wg sync.WaitGroup
 		wg.Add(expectedCount)
@@ -35,9 +35,13 @@ func TestCounter(t *testing.T) {
 	})
 }
 
-func assertCounter(t *testing.T, got Counter, expected int) {
+func assertCounter(t *testing.T, got *Counter, expected int) {
 	t.Helper()
 	if got.Value() != expected {
 		t.Errorf("got %d, expected %d", got.Value(), expected)
 	}
+}
+
+func NewCounter() *Counter {
+	return &Counter{}
 }
