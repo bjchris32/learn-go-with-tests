@@ -22,16 +22,6 @@ func (s *SpyStore) Cancel() {
 
 func TestHandler(t *testing.T) {
 	data := "hello world"
-	svr := Server(&SpyStore{data, false})
-
-	request := httptest.NewRequest(http.MethodGet, "/", nil)
-	response := httptest.NewRecorder()
-
-	svr.ServeHTTP(response, request)
-
-	if response.Body.String() != data {
-		t.Errorf(`got "%s", expected "%s"`, response.Body.String(), data)
-	}
 
 	t.Run("returns data from store", func(t *testing.T) {
 		store := &SpyStore{ response: data }
