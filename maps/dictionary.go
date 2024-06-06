@@ -3,8 +3,8 @@ package main
 type Dictionary map[string]string
 
 const (
-	ErrNotFound = DictionaryErr("could ont find the word")
-	ErrWordExists = DictionaryErr("cannot add word because it already exists")
+	ErrNotFound         = DictionaryErr("could not find the word")
+	ErrWordExists       = DictionaryErr("cannot add word because it already exists")
 	ErrWordDoesNotExist = DictionaryErr("cannot update word because it does not exist")
 )
 
