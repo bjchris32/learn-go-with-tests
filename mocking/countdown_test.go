@@ -1,10 +1,11 @@
 package main
 
-import "testing"
-import "bytes"
-import "reflect"
-import "time"
-
+import (
+	"bytes"
+	"reflect"
+	"testing"
+	"time"
+)
 
 func TestCountdown(t *testing.T) {
 	t.Run("prints 3 to Go!", func(t *testing.T) {
@@ -23,7 +24,9 @@ Go!`
 	})
 
 	t.Run("sleep before every print", func(t *testing.T) {
-		spySleepPrinter := &CountdownOperationsSpy {}
+		spySleepPrinter := &CountdownOperationsSpy{}
+		// spySleepPrinter implements both Write and Sleep,
+		// so it is kind of io.Writer and Sleeper
 		Countdown(spySleepPrinter, spySleepPrinter)
 
 		expected := []string{
@@ -46,7 +49,7 @@ Go!`
 func TestConfigurableSleeper(t *testing.T) {
 	sleepTime := 5 * time.Second
 	spyTime := &SpyTime{}
-	sleeper := ConfigurableSleeper{ sleepTime, spyTime.Sleep }
+	sleeper := ConfigurableSleeper{sleepTime, spyTime.Sleep}
 
 	sleeper.Sleep()
 
