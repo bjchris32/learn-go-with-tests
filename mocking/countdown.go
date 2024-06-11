@@ -1,13 +1,13 @@
 package main
 
-import(
-	"io"
+import (
 	"fmt"
+	"io"
 	"os"
 	"time"
 )
 
-type DefaultSleeper struct {}
+type DefaultSleeper struct{}
 
 func (d *DefaultSleeper) Sleep() {
 	time.Sleep(1 * time.Second)
@@ -17,38 +17,14 @@ type Sleeper interface {
 	Sleep()
 }
 
-type CountdownOperationsSpy struct {
-	Calls []string
-}
-
-func (s *CountdownOperationsSpy) Sleep() {
-	s.Calls = append(s.Calls, sleep)
-}
-
-func (s *CountdownOperationsSpy) Write(p []byte) (n int, err error) {
-	s.Calls = append(s.Calls, write)
-	return
-}
-
 type ConfigurableSleeper struct {
 	duration time.Duration
-	sleep func(time.Duration)
-}
-
-type SpyTime struct {
-	durationSlept time.Duration
-}
-
-func (s *SpyTime) Sleep(duration time.Duration) {
-	s.durationSlept = duration
+	sleep    func(time.Duration)
 }
 
 func (c *ConfigurableSleeper) Sleep() {
 	c.sleep(c.duration)
 }
-
-const write = "write"
-const sleep = "sleep"
 
 const finalWord = "Go!"
 const countdownStart = 3
